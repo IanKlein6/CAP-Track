@@ -1,0 +1,19 @@
+### Infos to coding the application 
+
+Soft Delete under Models: 
+    use x.objects.all() to get all job sites including soft-delete ones
+    use x.active_objects.all() to get only those that haven't been soft-delete
+    Example: JobSite.objects.all() 
+
+Calendar Week:
+    Calculates the calendar week using iso calendar. 
+    Query Examples: 
+        entries_in_specific_week = WorkEntry.objects.filter(calendar_week=1) 
+        entries_on_specific_date = WorkEntry.objects.filter(date='2024-01-02')
+
+Hour Totals:
+    Query Examples: 
+        totals_per_site = total_hours_per_job_site(2024, 1)
+        total_for_week = total_hours_for_week(2024, 1)
+
+
