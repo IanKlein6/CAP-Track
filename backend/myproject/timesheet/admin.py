@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import JobSite, WorkEntry, ConstructionManager
+from .models import JobSite, WorkEntry, ConstructionManager
 
 class JobSiteAdmin(admin.ModelAdmin):
     list_display = ('name', 'construction_manager')

@@ -1,3 +1,39 @@
+### DataBase 
+Start SQL 
+    brew services start mysql
+Stop SQL
+    brew services stop mysql
+Security Installation
+    mysql_secure_installation
+
+
+Commandline:
+Login 
+    mysql -u root -p
+Stop
+    exit; or quit;
+
+Creating a new user
+    CREATE USER 'your_mysql_username'@'localhost' IDENTIFIED BY 'your_mysql_password';
+    GRANT ALL PRIVILEGES ON your_database_name.* TO 'your_mysql_username'@'localhost';
+    FLUSH PRIVILEGES;
+
+Grant Privileges
+    GRANT ALL PRIVILEGES ON *.* TO 'old_username'@'localhost' WITH GRANT OPTION;
+    then always flush
+
+Change User:
+    Password
+        ALTER USER 'username'@'localhost' IDENTIFIED BY 'new_password';
+        FLUSH PRIVILEGES;
+    Username
+        Have to create a new user   
+        DROP USER 'old_username'@'localhost'; # to remove old user
+
+
+
+
+
 ### Infos to coding the application 
 
 Soft Delete under Models: 
