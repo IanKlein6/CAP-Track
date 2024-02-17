@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from django.db.models import Sum
-from models import WorkEntry
+from .models import WorkEntry
+
+
+from django.http import HttpResponse
+def home(request):
+    return HttpResponse("Hello, Django!")
+
 
 def total_hours_per_job_site(year, week):
     totals = WorkEntry.objects.filter(

@@ -1,3 +1,7 @@
+### Django
+Start server
+    python3 manage.py runserver
+
 ### DataBase 
 Start SQL 
     brew services start mysql

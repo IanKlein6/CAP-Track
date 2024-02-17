@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'timesheet.apps.TimesheetConfig',
+    'myproject',
 ]
 
 MIDDLEWARE = [
