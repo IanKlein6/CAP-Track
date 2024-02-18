@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-    'timesheet.apps.TimesheetConfig',
+    #'timesheet.apps.TimesheetConfig',
     
     'timesheet',
 ]
