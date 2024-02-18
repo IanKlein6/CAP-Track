@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'timesheet.apps.TimesheetConfig',
-    'myproject',
+    
+    'timesheet',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Change this to change which apps url is being used.
 ROOT_URLCONF = 'myproject.urls'
 
 TEMPLATES = [
