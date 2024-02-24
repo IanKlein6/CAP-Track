@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-    #'timesheet.apps.TimesheetConfig',
+    'corsheaders',
     
     'timesheet',
 ]
@@ -57,10 +57,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 # Change this to change which apps url is being used.
 ROOT_URLCONF = 'myproject.urls'
+
+
+# Allow all origins
+CORS_ALLOW_ALL_ORIGINS = True ### change this for production to restrict to trusted origins
 
 TEMPLATES = [
     {

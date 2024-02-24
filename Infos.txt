@@ -57,3 +57,10 @@ Hour Totals:
         total_for_week = total_hours_for_week(2024, 1)
 
 
+
+
+Production To-Dos:
+
+Settings.py
+# Allow all origins
+CORS_ALLOW_ALL_ORIGINS = True ### change this for production to restrict to trusted origins
