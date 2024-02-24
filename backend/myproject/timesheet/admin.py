@@ -1,15 +1,15 @@
 from django.contrib import admin
-from .models import JobSite, WorkEntry, ConstructionManager
+# from .models import JobSite, WorkEntry, ConstructionManager
 
-class JobSiteAdmin(admin.ModelAdmin):
-    list_display = ('name', 'construction_manager')
+# class JobSiteAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'construction_manager')
 
-class WorkdEntryAdmin(admin.ModelAdmin):
-    list_display = ('user', 'job_site', 'date', 'hours_wored', 'calendar_week')
+# class WorkdEntryAdmin(admin.ModelAdmin):
+#     list_display = ('user', 'job_site', 'date', 'hours_wored', 'calendar_week')
 
-admin.site.register(JobSite)
-admin.site.register(WorkEntry)
-admin.site.register(ConstructionManager)
+# admin.site.register(JobSite)
+# admin.site.register(WorkEntry)
+# admin.site.register(ConstructionManager)
 
 
 #from django.contrib.auth.models import User  Only needed if customizing the User admin
