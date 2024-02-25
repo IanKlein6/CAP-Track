@@ -77,7 +77,9 @@ ROOT_URLCONF = 'myproject.urls'
 
 
 # Allow all origins
-CORS_ALLOW_ALL_ORIGINS = True ### change this for production to restrict to trusted origins
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+] ### change this for production to restrict to trusted origins
 
 TEMPLATES = [
     {
@@ -154,19 +156,23 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'django_debug.log'),
         },
     },
     'loggers': {
-        '': {  # This configures root logger
-            'handlers': ['console'],
-            'level': 'INFO',  # Change to DEBUG for more info
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
             'propagate': True,
         },
     },
 }
+

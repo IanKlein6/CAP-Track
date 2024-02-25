@@ -1,3 +1,6 @@
+/* Using App.css for styling that pertains to the overall layout and structure of the application's main container, keeping in mind that these styles should complement but not substitute for component-specific CSS. */
+
+
 .App {
   text-align: center;
 }

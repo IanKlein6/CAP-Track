@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Sum
 from rest_framework import viewsets
-from .models import Item
+from .models import Item, CustomUser
 from .serializers import ItemSerializer
 
 import logging
@@ -13,6 +13,9 @@ from rest_framework.views import APIView
 from .serializers import UserSerializer
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
+from rest_framework import generics 
+from django.contrib.auth import get_user_model
+#from rest_framework.permissions import IsAuthenticated
 
 
 class LoginView(APIView):
@@ -29,6 +32,7 @@ class LoginView(APIView):
 
 
 class UserCreate(APIView):
+    print("usercreate started")
     def post(self, request, format='json'):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -36,6 +40,12 @@ class UserCreate(APIView):
             if user:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserListView(generics.ListAPIView):
+    print("user list returned")
+    queryset = get_user_model().objects.all()
+    serializer_class = UserSerializer
+    #permission_classes = [IsAuthenticated] 
 
 
 

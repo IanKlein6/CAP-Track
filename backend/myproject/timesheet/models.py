@@ -3,11 +3,14 @@ from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 from django.utils import timezone 
 from datetime import datetime
+import logging
 
 # User Authentication
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 
+# Logger
+logger = logging.getLogger(__name__)
 
 ### User Authentication
 class CustomUser(AbstractUser):
@@ -21,6 +24,17 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+    
+    def save(self, *args, **kwargs):
+        if self._state.adding:
+            logger.info(f'Creating new user: {self.email}')
+        else:
+            logger.info(f'Updating user: {self.email}')
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        logger.info(f'Deleting user: {self.email}')
+        super().delete(*args, **kwargs)
 
 class Item(models.Model):
     name = models.CharField(max_length=100)
@@ -29,7 +43,21 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        # Check if the item is being created by checking if it has an ID set
+        if not self.id:
+            logger.info(f'Creating new item: {self.name}')
+        else:
+            logger.info(f'Updating item: {self.name}')
+        super().save(*args, **kwargs)
 
+    def delete(self, *args, **kwargs):
+        logger.info(f'Deleting item: {self.name}')
+        super().delete(*args, **kwargs)
+
+
+
+        
 # ### Infastructure Models
 # phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Example: ...")
 
