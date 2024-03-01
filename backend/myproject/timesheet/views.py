@@ -15,20 +15,37 @@ from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework import generics 
 from django.contrib.auth import get_user_model
+from django.http import HttpResponse
+from rest_framework.authtoken.models import Token
 #from rest_framework.permissions import IsAuthenticated
 
 
 class LoginView(APIView):
-    def post(self, request,):
+    def post(self, request):
         username = request.data.get("username")
         password = request.data.get("password")
         user = authenticate(username=username, password=password)
         if user:
             token, _ = Token.objects.get_or_create(user=user)
-            return Response({"token": token.key}, status=status.HTTP_200_OK)
+            response = Response(status=status.HTTP_200_OK)
+            response.set_cookie(
+                key='auth_token',
+                value=token.key,
+                httponly=True,
+                samesite='Lax'
+                # Secure=True, # Uncomment if you are using HTTPS
+            )
+            print(f"{username} has been authenticated")
+            return response
         else:
+            print("authentication failed")
             return Response({"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
-
+        
+class LogoutView(APIView):
+    def post(self, request):
+        response = Response(status=status.HTTP_200_OK)
+        response.delete_cookie('auth_token')
+        return response
 
 
 class UserCreate(APIView):

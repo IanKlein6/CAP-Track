@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Snackbar } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function LogInTest() {
     const [loginData, setLoginData] = useState({
         username: '',
         password: '',
-    }); 
+    });  
     const [openSnackbar, setOpenSnackbar] = useState(false);
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const handleChange = (e) => {
         setLoginData({
@@ -19,21 +21,17 @@ function LogInTest() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/login/', loginData);
+            const response = await axios.post('http://localhost:8000/api/login/', loginData, { withCredentials: true });
             console.log('Login successful:', response.data);
             if (response.status === 200) {
-                // Assuming status code 200 means success
                 setOpenSnackbar(true); // Show success snackbar only if login is successful
-                // Redirect the user or perform other actions on successful login
+                navigate('/dashboard'); // Redirect to the dashboard on successful login
             }
         } catch (error) {
             console.error('There was an error logging in:', error.response);
-            // Here, you should handle login failure
-            // For example, you could show a different Snackbar message indicating the failure
+            // Here, you can handle login failure, such as showing an error snackbar
         }
     };
-    
-   
 
     const handleCloseSnackbar = () => {
         setOpenSnackbar(false);
@@ -69,7 +67,6 @@ function LogInTest() {
                 </Button>
             </form>
 
-            Success Message Snackbar
             <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}
