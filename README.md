@@ -5,6 +5,30 @@
 
 ## 🚧 Still in Development
 
+### Introduction
+
+As a Software Developer with a long previous career history in carpentry and a deep understanding of the day-to-day realities of the construction and carpentry industries, I recognized the pressing need for a solution that could address the unique challenges of project management and time tracking in our field. This led to the birth of CAP: Track, a key component of the future Construction Application Platform (CAP). My goal is to enhance operational efficiency, improve the accuracy of logging work hours across various job sites, and streamline project management processes.
+
+### The Problem We're Solving
+
+In the construction and carpentry sectors, traditional methods of tracking work hours—ranging from paper logs to basic spreadsheets—are not only time-consuming but also prone to errors. These outdated practices can lead to inaccuracies that affect payroll and project costing. 
+
+**CAP: Track** aims to eliminate these inefficiencies by introducing a smart, flexible, and user-friendly webform for time tracking, seamlessly integrated with financial software. This innovation simplifies administrative tasks and offers real-time insights into labor costs and project progress, enabling better decision-making and resource allocation.
+
+### Core Features
+
+- **Intuitive Time Tracking**: Specifically designed for the construction and carpentry industry, offering an adaptable and intuitive interface for logging hours at different job sites and roles.
+- **Automated Data Integration**: Facilitates direct integration with financial software, reducing the need for manual data entry and minimizing errors.
+- **Administrative Oversight**: An admin dashboard for job site and user management, complete with detailed analytics.
+- **Secure User Experience**: Ensures a secure and personalized login, enhancing ease of use while protecting user data.
+
+### Technologies
+
+Developed with a focus on reliability, scalability, and user-friendliness:
+- **Backend**: Utilizing Python and Django, with Django REST Framework for API development.
+- **Database**: MySQL, selected for its compatibility with Django and reliability.
+- **Frontend**: React.js, with React Hook Forms for interactive forms, and styled with Material-UI for a modern look and feel.
+
 ## Progress Report
 
 As we develop CAP: Track, we are committed to transparency and sharing our progress. Here's a glimpse into the development stages:
@@ -31,29 +55,6 @@ As we develop CAP: Track, we are committed to transparency and sharing our progr
 </p>
 *To ensure that our application's backend was robust, we utilized Postman to test API endpoints. This allowed us to identify and solve problems early in the development process.*
 
-### Introduction
-
-As a Software Developer with a long previous career history in carpentry and a deep understanding of the day-to-day realities of the construction and carpentry industries, I recognized the pressing need for a solution that could address the unique challenges of project management and time tracking in our field. This led to the birth of CAP: Track, a key component of the future Construction Application Platform (CAP). My goal is to enhance operational efficiency, improve the accuracy of logging work hours across various job sites, and streamline project management processes.
-
-### The Problem We're Solving
-
-In the construction and carpentry sectors, traditional methods of tracking work hours—ranging from paper logs to basic spreadsheets—are not only time-consuming but also prone to errors. These outdated practices can lead to inaccuracies that affect payroll and project costing. 
-
-**CAP: Track** aims to eliminate these inefficiencies by introducing a smart, flexible, and user-friendly webform for time tracking, seamlessly integrated with financial software. This innovation simplifies administrative tasks and offers real-time insights into labor costs and project progress, enabling better decision-making and resource allocation.
-
-### Core Features
-
-- **Intuitive Time Tracking**: Specifically designed for the construction and carpentry industry, offering an adaptable and intuitive interface for logging hours at different job sites and roles.
-- **Automated Data Integration**: Facilitates direct integration with financial software, reducing the need for manual data entry and minimizing errors.
-- **Administrative Oversight**: An admin dashboard for job site and user management, complete with detailed analytics.
-- **Secure User Experience**: Ensures a secure and personalized login, enhancing ease of use while protecting user data.
-
-### Technologies
-
-Developed with a focus on reliability, scalability, and user-friendliness:
-- **Backend**: Utilizing Python and Django, with Django REST Framework for API development.
-- **Database**: MySQL, selected for its compatibility with Django and reliability.
-- **Frontend**: React.js, with React Hook Forms for interactive forms, and styled with Material-UI for a modern look and feel.
 
 ## 🌟 Vision and Contribution
 
