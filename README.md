@@ -12,7 +12,7 @@ As we develop CAP: Track, we are committed to transparency and sharing our progr
 ### 1. Items Management Interface Development
 
 <p align="center">
-  <img src="/progress%20images/forum_test.png" alt="Items Management Interface" width="600">
+  <img src="/progress%20images/forum_test.png" alt="Items Management Interface" width="400">
 </p>
 *Created a test interface for item management. This interface was crucial for ensuring that our API could successfully connect to the backend and interact with the database.*
 
