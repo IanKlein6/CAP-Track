@@ -11,17 +11,17 @@ As we develop CAP: Track, we are committed to transparency and sharing our progr
 
 ### 1. Items Management Interface Development
 
-![Items Management Interface](./progress%20images/Screenshot_2024-02-25_at_18.01.26.png)
-*Our first milestone was creating a test interface for item management. This interface was crucial for ensuring that our API could successfully connect to the backend and interact with the database.*
+![Items Management Interface](/progress%20images/forum_test.png)
+*Created a test interface for item management. This interface was crucial for ensuring that our API could successfully connect to the backend and interact with the database.*
 
 ### 2. User Creation and Authentication
 
-![User Signup Interface](/progress%20images/Screenshot_2024-02-25_at_18.02.29.png)
+![User Signup Interface](/progress%20images/user_signup_test.png)
 *The next step was developing a secure user creation interface. We integrated Django's authentication system to manage user sign-ups and ensure password security through hashing.*
 
 ### 3. API Testing and Problem Solving with Postman
 
-![Postman API Testing](/progress%20images/Screenshot_2024-02-25_at_18.02.44.png)
+![Postman API Testing](/progress%20images/postman_aip_testing.png)
 *To ensure that our application's backend was robust, we utilized Postman to test API endpoints. This allowed us to identify and solve problems early in the development process.*
 
 ### Introduction
