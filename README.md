@@ -5,6 +5,25 @@
 
 ## 🚧 Still in Development
 
+## Progress Report
+
+As we develop CAP: Track, we are committed to transparency and sharing our progress. Here's a glimpse into the development stages:
+
+### 1. Items Management Interface Development
+
+![Items Management Interface](/progress%20images/Screenshot_2024-02-25_at_18.01.26.png)
+*Our first milestone was creating a test interface for item management. This interface was crucial for ensuring that our API could successfully connect to the backend and interact with the database.*
+
+### 2. User Creation and Authentication
+
+![User Signup Interface](/progress%20images/Screenshot_2024-02-25_at_18.02.29.png)
+*The next step was developing a secure user creation interface. We integrated Django's authentication system to manage user sign-ups and ensure password security through hashing.*
+
+### 3. API Testing and Problem Solving with Postman
+
+![Postman API Testing](/progress%20images/Screenshot_2024-02-25_at_18.02.44.png)
+*To ensure that our application's backend was robust, we utilized Postman to test API endpoints. This allowed us to identify and solve problems early in the development process.*
+
 ### Introduction
 
 As a Software Developer with a long previous career history in carpentry and a deep understanding of the day-to-day realities of the construction and carpentry industries, I recognized the pressing need for a solution that could address the unique challenges of project management and time tracking in our field. This led to the birth of CAP: Track, a key component of the future Construction Application Platform (CAP). My goal is to enhance operational efficiency, improve the accuracy of logging work hours across various job sites, and streamline project management processes.
