@@ -11,7 +11,9 @@ As we develop CAP: Track, we are committed to transparency and sharing our progr
 
 ### 1. Items Management Interface Development
 
-![Items Management Interface](/progress%20images/forum_test.png)
+<p align="center">
+  <img src="/progress%20images/forum_test.png" alt="Items Management Interface" style="border: 1px solid #ddd; box-shadow: 2px 2px 4px #888;">
+</p>
 *Created a test interface for item management. This interface was crucial for ensuring that our API could successfully connect to the backend and interact with the database.*
 
 ### 2. User Creation and Authentication
