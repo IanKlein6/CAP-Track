@@ -1,4 +1,4 @@
-node.js 
+node.js v16.20.2
 
 anxios #promise based HTTP client connection from django to react
 
