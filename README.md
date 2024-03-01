@@ -18,12 +18,17 @@ As we develop CAP: Track, we are committed to transparency and sharing our progr
 
 ### 2. User Creation and Authentication
 
-![User Signup Interface](/progress%20images/user_signup_test.png)
+<p align="center">
+  <img src="/progress%20images/user_signup_test.png" alt="User Signup Interface" width="400">
+</p>
 *The next step was developing a secure user creation interface. We integrated Django's authentication system to manage user sign-ups and ensure password security through hashing.*
 
 ### 3. API Testing and Problem Solving with Postman
 
-![Postman API Testing](/progress%20images/postman_aip_testing.png)
+
+<p align="center">
+  <img src="/progress%20images/postman_api_testing.png" alt="Postman API Testing" width="400">
+</p>
 *To ensure that our application's backend was robust, we utilized Postman to test API endpoints. This allowed us to identify and solve problems early in the development process.*
 
 ### Introduction
