@@ -6,7 +6,7 @@ function LogInTest() {
     const [loginData, setLoginData] = useState({
         username: '',
         password: '',
-    });
+    }); 
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
     const handleChange = (e) => {
@@ -19,16 +19,21 @@ function LogInTest() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Replace the URL with your actual login API endpoint
             const response = await axios.post('http://localhost:8000/api/login/', loginData);
             console.log('Login successful:', response.data);
-            setOpenSnackbar(true);
-            // Handle further logic on successful login here (e.g., redirecting the user)
+            if (response.status === 200) {
+                // Assuming status code 200 means success
+                setOpenSnackbar(true); // Show success snackbar only if login is successful
+                // Redirect the user or perform other actions on successful login
+            }
         } catch (error) {
             console.error('There was an error logging in:', error.response);
-            // Optionally, handle login failure (e.g., displaying an error message)
+            // Here, you should handle login failure
+            // For example, you could show a different Snackbar message indicating the failure
         }
     };
+    
+   
 
     const handleCloseSnackbar = () => {
         setOpenSnackbar(false);
@@ -64,7 +69,7 @@ function LogInTest() {
                 </Button>
             </form>
 
-            {/* Success Message Snackbar */}
+            Success Message Snackbar
             <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}
