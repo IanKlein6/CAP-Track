@@ -80,6 +80,8 @@ ROOT_URLCONF = 'myproject.urls'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ] ### change this for production to restrict to trusted origins
+# To allow cookies
+CORS_ALLOW_CREDENTIALS = True
 
 TEMPLATES = [
     {

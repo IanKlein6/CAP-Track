@@ -1,35 +1,29 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Snackbar } from '@mui/material';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 function LogInTest() {
-    const [loginData, setLoginData] = useState({
-        username: '',
-        password: '',
-    });  
+    const [loginData, setLoginData] = useState({ username: '', password: '' });
     const [openSnackbar, setOpenSnackbar] = useState(false);
-    const navigate = useNavigate(); // Initialize useNavigate
+    const [errorSnackbar, setErrorSnackbar] = useState(false); // Add this line
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
-        setLoginData({
-            ...loginData,
-            [e.target.name]: e.target.value,
-        });
+        setLoginData({ ...loginData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:8000/api/login/', loginData, { withCredentials: true });
-            console.log('Login successful:', response.data);
             if (response.status === 200) {
-                setOpenSnackbar(true); // Show success snackbar only if login is successful
-                navigate('/dashboard'); // Redirect to the dashboard on successful login
+                setOpenSnackbar(true);
+                navigate('/dashboard'); // Redirects to the dashboard upon successful login
             }
         } catch (error) {
             console.error('There was an error logging in:', error.response);
-            // Here, you can handle login failure, such as showing an error snackbar
+            setErrorSnackbar(true); // Show error snackbar when login fails
         }
     };
 
@@ -72,6 +66,12 @@ function LogInTest() {
                 autoHideDuration={6000}
                 onClose={handleCloseSnackbar}
                 message="Login successful!"
+            />
+            <Snackbar
+                open={errorSnackbar}
+                autoHideDuration={6000}
+                onClose={() => setErrorSnackbar(false)}
+                message="Login failed. Please try again."
             />
         </Container>
     );
