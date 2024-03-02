@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
 import axios from 'axios';
+import Header from '../components/common/Header';
 
 function Profile() {
     const [userData, setUserData] = useState({
@@ -43,36 +44,39 @@ function Profile() {
     };
 
     return (
-        <Container maxWidth="sm">
-            <Typography variant="h4" component="h1" gutterBottom>
-                User Profile
-            </Typography>
-            <form onSubmit={handleSubmit}>
-                <TextField
-                    label="Username"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    name="username"
-                    value={userData.username}
-                    onChange={handleChange}
-                />
-                <TextField
-                    label="Email"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    name="email"
-                    type="email"
-                    value={userData.email}
-                    onChange={handleChange}
-                />
-                {/* Add other fields as necessary */}
-                <Button type="submit" variant="contained" color="primary" fullWidth>
-                    Update Profile
-                </Button>
-            </form>
-        </Container>
+        <>
+            <Header/>
+            <Container maxWidth="sm">
+                <Typography variant="h4" component="h1" gutterBottom>
+                    User Profile
+                </Typography>
+                <form onSubmit={handleSubmit}>
+                    <TextField
+                        label="Username"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        name="username"
+                        value={userData.username}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        label="Email"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        name="email"
+                        type="email"
+                        value={userData.email}
+                        onChange={handleChange}
+                    />
+                    {/* Add other fields as necessary */}
+                    <Button type="submit" variant="contained" color="primary" fullWidth>
+                        Update Profile
+                    </Button>
+                </form>
+            </Container>
+        </>
     );
 }
 

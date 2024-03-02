@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Container, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/common/Header';
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -14,17 +15,20 @@ function Dashboard() {
     };
 
     return (
-        <Container maxWidth="sm">
-            <Typography variant="h4" component="h1" gutterBottom>
-                Dashboard
-            </Typography>
-            <Button variant="contained" color="primary" onClick={goToProfile} fullWidth style={{ marginBottom: '10px' }}>
-                Go to Profile
-            </Button>
-            <Button variant="contained" color="secondary" onClick={goToForums} fullWidth>
-                Go to Forums
-            </Button>
-        </Container>
+        <>
+            <Header />
+            <Container maxWidth="sm">
+                <Typography variant="h4" component="h1" gutterBottom>
+                    Dashboard
+                </Typography>
+                <Button variant="contained" color="primary" onClick={goToProfile} fullWidth style={{ marginBottom: '10px' }}>
+                    Go to Profile
+                </Button>
+                <Button variant="contained" color="secondary" onClick={goToForums} fullWidth>
+                    Go to Forums
+                </Button>
+            </Container>
+        </>
     );
 }
 
