@@ -9,14 +9,18 @@ import LogInTest from './pages/LoginTest';
 import Dashboard from './pages/DashboardPage';
 import Profile from './pages/ProfilePage';
 
+import Header from './components/common/Header';
+
 // Enable axios withCredentials globally
 axios.defaults.withCredentials = true;
 
 // Import other pages as needed
 
 function App() {
+  const username = "John Doe";
   return (
     <Router>
+      <Header username={username} />
       <Routes>
         <Route path="test" element={<HomeTestPage />} />
         <Route path="signup" element={<UserSignUp />} />

@@ -6,6 +6,7 @@ react-router-dom # router for react app.js
 
 
 @mui/material@5.15.10, @mui/core-downloads-tracker@5.15.10, @mui/system@5.15.9, @mui/private-theming@5.15.9, @mui/styled-engine@5.15.9, @mui/utils@5.15.9, @mui/base@5.0.0-beta.36
+npm install @mui/icons-material
 
 mui/styled-engine@5.15.9, @mui/utils@5.15.9
 ├── https://github.com/sponsors/sindresorhus
