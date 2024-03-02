@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu'; // Icon for menu button
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
