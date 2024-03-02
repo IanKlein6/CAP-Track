@@ -1,13 +1,24 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
+import React, { useState } from 'react';
+import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
+import MenuIcon from '@mui/icons-material/Menu'; // Icon for menu button
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useUser } from '../../context/UserContext';
 
-function Header({ username }) {
+function Header() {
     const { user, setUser } = useUser();
     const navigate = useNavigate();
+    const [anchorEl, setAnchorEl] = useState(null); // For menu state
+    const open = Boolean(anchorEl);
+
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     const handleLogout = async () => {
         try {
@@ -23,17 +34,37 @@ function Header({ username }) {
         <AppBar position="static">
             <Toolbar>
                 <IconButton
-                    size="large"
                     edge="start"
                     color="inherit"
-                    aria-label="home"
+                    aria-label="menu"
                     sx={{ mr: 2 }}
-                    onClick={() => navigate('/dashboard')}
+                    onClick={handleMenu}
                 >
-                    <HomeIcon />
+                    <MenuIcon />
                 </IconButton>
+                <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                    open={open}
+                    onClose={handleClose}
+                >
+                    <MenuItem onClick={() => { navigate('/dashboard'); handleClose(); }}>Dashboard</MenuItem>
+                    <MenuItem onClick={() => { navigate('/profile'); handleClose(); }}>Profile</MenuItem>
+                    <MenuItem onClick={() => { navigate('/forums'); handleClose(); }}>Forums</MenuItem>
+                    <MenuItem onClick={() => { navigate('/signup'); handleClose(); }}>Sign Up</MenuItem>
+                    {/* Add more MenuItem components as needed for additional pages */}
+                </Menu>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    {user? user.username : ''}
+                    {user ? user.username : ''}
                 </Typography>
                 <Button color="inherit" onClick={handleLogout}>Logout</Button>
             </Toolbar>
