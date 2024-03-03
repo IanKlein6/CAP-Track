@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, List, ListItem, ListItemText, Snackbar } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function UserSignUp() {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
         password: '',
+        invitationCode: '',
     });
     const [users, setUsers] = useState([]);
     const [showUsers, setShowUsers] = useState(false);
-    const [openSnackbar, setOpenSnackbar] = useState(false); // For success message Snackbar
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const navigate = useNavigate(); // Instantiate navigate
 
     const handleChange = (e) => {
         setFormData({
@@ -21,33 +24,28 @@ function UserSignUp() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Inside your handleSubmit function
         try {
             const response = await axios.post('http://localhost:8000/api/signup/', formData);
-            console.log('User created successfully:', response.data); // Use the response data
-            setOpenSnackbar(true);
-            // Optionally, display response data in snackbar or update state
-            // setSuccessMessage(`User ${response.data.username} created successfully!`);
-            fetchUsers(); // Refresh the user list upon successful signup
+            if (response.status === 201) {
+                setOpenSnackbar(true);
+                navigate('/dashboard'); // Redirect to the dashboard
+            }
         } catch (error) {
-            console.error('There was an error creating the user:', error.response);
+            console.error('There was an error:', error.response || error);
         }
-
     };
 
     const fetchUsers = async () => {
         try {
             const response = await axios.get('http://localhost:8000/api/users/');
             setUsers(response.data);
-            setShowUsers(true); // Display users only after fetching
+            setShowUsers(true);
         } catch (error) {
             console.error('There was an error fetching the users:', error.response);
         }
     };
 
-    const handleCloseSnackbar = () => {
-        setOpenSnackbar(false);
-    };
+    const handleCloseSnackbar = () => setOpenSnackbar(false);
 
     return (
         <Container maxWidth="sm">
@@ -84,15 +82,24 @@ function UserSignUp() {
                     value={formData.password}
                     onChange={handleChange}
                 />
+                <TextField
+                    label="Invitation Code"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    name="invitationCode"
+                    value={formData.invitationCode}
+                    onChange={handleChange}
+                />
                 <Button type="submit" variant="contained" color="primary" fullWidth>
                     Sign Up
                 </Button>
             </form>
-            <Button onClick={fetchUsers} variant="contained" color="secondary" fullWidth style={{ marginTop: '20px' }}>
-                Retrieve Users
-            </Button>
             {showUsers && (
                 <>
+                    <Button onClick={fetchUsers} variant="contained" color="secondary" fullWidth style={{ marginTop: '20px' }}>
+                        Retrieve Users
+                    </Button>
                     <Typography variant="h5" component="h2" style={{ marginTop: '20px' }}>
                         User List
                     </Typography>
@@ -105,8 +112,6 @@ function UserSignUp() {
                     </List>
                 </>
             )}
-
-            {/* Success Message Snackbar */}
             <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}
@@ -116,6 +121,5 @@ function UserSignUp() {
         </Container>
     );
 }
-
 
 export default UserSignUp;

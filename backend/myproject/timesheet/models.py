@@ -12,6 +12,14 @@ from django.conf import settings
 # Logger
 logger = logging.getLogger(__name__)
 
+#Invitation Code
+class InvitationCode(models.Model):
+    code = models.CharField(max_length=100, unique=True)
+    is_used = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.code
+
 ### User Authentication
 class CustomUser(AbstractUser):
     bio = models.TextField(blank=True)

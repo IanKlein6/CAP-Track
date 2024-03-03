@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Sum
 from rest_framework import viewsets
-from .models import Item, CustomUser
+from .models import Item, InvitationCode, CustomUser
 from .serializers import ItemSerializer
 
 import logging
@@ -50,13 +50,19 @@ class LogoutView(APIView):
 
 
 class UserCreate(APIView):
-    print("usercreate started")
     def post(self, request, format='json'):
+        invitation_code_input = request.data.get("invitationCode")
+        invitation_code = InvitationCode.objects.filter(code=invitation_code_input, is_used=False).first()
+
+        if not invitation_code:
+            return Response({"error": "Invalid or used invitation code"}, status=status.HTTP_400_BAD_REQUEST)
+
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
-            if user:
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            invitation_code.is_used = True  # Mark the invitation code as used
+            invitation_code.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserListView(generics.ListAPIView):

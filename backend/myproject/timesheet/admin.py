@@ -1,18 +1,9 @@
 from django.contrib import admin
-# from .models import JobSite, WorkEntry, ConstructionManager
+from .models import CustomUser, InvitationCode
 
-# class JobSiteAdmin(admin.ModelAdmin):
-#     list_display = ('name', 'construction_manager')
+# If you had previously registered CustomUser or want to modify its admin interface
 
-# class WorkdEntryAdmin(admin.ModelAdmin):
-#     list_display = ('user', 'job_site', 'date', 'hours_wored', 'calendar_week')
+admin.site.register(CustomUser)
 
-# admin.site.register(JobSite)
-# admin.site.register(WorkEntry)
-# admin.site.register(ConstructionManager)
-
-
-#from django.contrib.auth.models import User  Only needed if customizing the User admin
-# If customizing User admin, you would first unregister, then register with a custom ModelAdmin
-# admin.site.unregister(User)
-# admin.site.register(User, CustomUserAdmin)
+# Registering InvitationCode
+admin.site.register(InvitationCode)
