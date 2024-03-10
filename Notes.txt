@@ -1,0 +1,8 @@
+10.03
+    - moved file structure to remove pages and put everything in components
+    - changed to a single-page application (SPA) to reduce letancy and improve user experience
+    - debated about also useing Next.js and decided agianst it as next is for full-stack and we are already useing Django as our full stack.
+    
+    ** to do:
+    - working on getting the forum page to render. cant seem to get it to show. not sure if it is backend related or fronend not rendering. 
+    
