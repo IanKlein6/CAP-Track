@@ -39,3 +39,12 @@
     transform: rotate(360deg);
   }
 }
+
+.app-container {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  padding: 20px; /* Adjust padding as needed */
+}

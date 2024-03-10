@@ -13,7 +13,6 @@ router.register(r'items', ItemViewSet)
 # The API URLs are now determined automatically by the router.
 urlpatterns = [ 
     path('test/', include(router.urls)),
-
     path('signup/', UserCreate.as_view(), name='signup'), 
     path('users/', UserListView.as_view(), name='users'), 
     path('login/', LoginView.as_view(), name='login'),
