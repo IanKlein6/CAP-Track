@@ -33,21 +33,29 @@ Developed with a focus on reliability, scalability, and user-friendliness:
 
 As we develop CAP: Track, we are committed to transparency and sharing our progress. Here's a glimpse into the development stages:
 
-### 1. Items Management Interface Development
+### 10.03.2024
+
+<p align="center">
+  <img src="/progress%20images/DashBoard 10.03.2024.png" alt="New DashBoard SAP" width="400">
+</p>
+*The file structure was reorganized to eliminate separate pages and consolidate everything under components, transitioning to a single-page application (SPA) to enhance user experience and reduce latency. While considering Next.js for further improvements, the decision was made against it, as it is more suited for full-stack development and the project already utilizes Django for that purpose.*
+
+
+### Items Management Interface Development
 
 <p align="center">
   <img src="/progress%20images/forum_test.png" alt="Items Management Interface" width="400">
 </p>
 *Created a test interface for item management. This interface was crucial for ensuring that our API could successfully connect to the backend and interact with the database.*
 
-### 2. User Creation and Authentication
+### User Creation and Authentication
 
 <p align="center">
   <img src="/progress%20images/user_signup_test.png" alt="User Signup Interface" width="400">
 </p>
 *The next step was developing a secure user creation interface. We integrated Django's authentication system to manage user sign-ups and ensure password security through hashing.*
 
-### 3. API Testing and Problem Solving with Postman
+### API Testing and Problem Solving with Postman
 
 
 <p align="center">
