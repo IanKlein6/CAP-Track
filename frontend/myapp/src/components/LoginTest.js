@@ -1,40 +1,41 @@
-// LogInTest.js
-
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Snackbar } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../context/UserContext'; // Correctly import useUser
-
-
+import { useUser } from '../context/UserContext'; // Context hook for user state management.
 
 function LogInTest() {
-  
+    // Local state to manage login data and snackbar notifications.
     const [loginData, setLoginData] = useState({ username: '', password: '' });
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [errorSnackbar, setErrorSnackbar] = useState(false);
+
+    // Hooks for navigation and user context.
     const navigate = useNavigate();
-    const { setUser } = useUser(); // Correctly use setUser from the context
+    const { setUser } = useUser();
+
+    // Handle input changes for login form.
     const handleChange = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
     };
- 
+
+    // Handle the login form submission.
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:8000/api/login/', loginData, { withCredentials: true });
             if (response.status === 200) {
-                setOpenSnackbar(true);
-                setUser({ username: loginData.username }); // Set the user in context
-                navigate('/dashboard'); // Redirect to the dashboard
-                console.log('Login Successful');
+                setUser({ username: loginData.username }); // Update user context.
+                navigate('/dashboard'); // Navigate to the dashboard on success.
+                setOpenSnackbar(true); // Show success snackbar.
             }
         } catch (error) {
             console.error('There was an error logging in:', error.response || error);
-            setErrorSnackbar(true);
+            setErrorSnackbar(true); // Show error snackbar on failure.
         }
     };
 
+    // Close the snackbar notifications.
     const handleCloseSnackbar = () => {
         setOpenSnackbar(false);
         setErrorSnackbar(false);

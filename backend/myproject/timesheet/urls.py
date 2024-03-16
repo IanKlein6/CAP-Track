@@ -1,16 +1,13 @@
 from django.urls import path, include
-from django.contrib import admin  # Ensure this import is correct for admin
 from rest_framework.routers import DefaultRouter
-from .views import ItemViewSet, LoginView, LogoutView
-from .views import UserCreate, UserListView, UserSerializer
+from .views import ItemViewSet, LoginView, LogoutView, UserCreate, UserListView
+from django.contrib import admin
 
-
-# Create a router and register our viewsets with it.
+# Setup the router for ItemViewSet
 router = DefaultRouter()
 router.register(r'items', ItemViewSet)
 
-
-# The API URLs are now determined automatically by the router.
+# Define URL patterns for the API
 urlpatterns = [ 
     path('test/', include(router.urls)),
     path('signup/', UserCreate.as_view(), name='signup'), 

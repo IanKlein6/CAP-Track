@@ -14,6 +14,7 @@ function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Define the menu items with their respective icons and paths
   const menuItems = [
     { text: 'Login', icon: <LoginIcon />, path: '/login' },
     { text: 'Sign Up', icon: <AppRegistrationIcon />, path: '/signup' },
@@ -27,9 +28,9 @@ function Sidebar() {
       {menuItems.map((item) => (
         <ListItem 
           button
-          key={item.text} 
+          key={item.text}
           onClick={() => navigate(item.path)}
-          selected={location.pathname === item.path}
+          selected={location.pathname === item.path} // Highlight the current path
         >
           <ListItemIcon>{item.icon}</ListItemIcon>
           <ListItemText primary={item.text} />

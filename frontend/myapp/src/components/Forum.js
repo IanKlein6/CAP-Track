@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { TextField, Button, Box, Typography, Container, List, ListItem, ListItemText, Paper } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Container,
+  List,
+  ListItem,
+  ListItemText,
+  Paper
+} from '@mui/material';
 
 function Forum() {
   const [items, setItems] = useState([]);
@@ -9,12 +19,14 @@ function Forum() {
   const [fetchId, setFetchId] = useState('');
   const [fetchedItem, setFetchedItem] = useState(null);
 
+  // Fetch items from the backend
   useEffect(() => {
     axios.get('http://localhost:8000/api/test/items/')
       .then(response => setItems(response.data))
       .catch(error => console.error('There was an error fetching the items: ', error));
   }, []);
 
+  // Handle item submission
   const handleSubmit = (event) => {
     event.preventDefault();
     const newItem = { name, description };
@@ -27,12 +39,14 @@ function Forum() {
       .catch(error => console.error('There was an error posting the item: ', error));
   };
 
+  // Handle item deletion
   const handleDelete = (itemId) => {
     axios.delete(`http://localhost:8000/api/test/items/${itemId}/`)
       .then(() => setItems(items.filter(item => item.id !== itemId)))
       .catch(error => console.error('There was an error deleting the item: ', error));
   };
 
+  // Fetch an item by ID
   const handleFetchById = (event) => {
     event.preventDefault();
     axios.get(`http://localhost:8000/api/test/items/${fetchId}/`)

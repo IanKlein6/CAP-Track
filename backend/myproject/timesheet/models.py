@@ -9,10 +9,10 @@ import logging
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 
-# Logger
+# Logger setup
 logger = logging.getLogger(__name__)
 
-#Invitation Code
+# Invitation Code model for managing invitation codes
 class InvitationCode(models.Model):
     code = models.CharField(max_length=100, unique=True)
     is_used = models.BooleanField(default=False)
@@ -20,15 +20,13 @@ class InvitationCode(models.Model):
     def __str__(self):
         return self.code
 
-### User Authentication
+# Custom User model for authentication
 class CustomUser(AbstractUser):
     bio = models.TextField(blank=True)
-    #add more as needed see info.txt
-
-    email = models.EmailField(unique=True) # Email as the primary identifier, set email field to unique
+    email = models.EmailField(unique=True) # Email as the primary identifier
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username'] #add 'first_name' and 'last_name if required
+    REQUIRED_FIELDS = ['username'] # Additional required fields
 
     def __str__(self):
         return self.email
@@ -44,6 +42,7 @@ class CustomUser(AbstractUser):
         logger.info(f'Deleting user: {self.email}')
         super().delete(*args, **kwargs)
 
+# Item model for managing items
 class Item(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -52,7 +51,6 @@ class Item(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        # Check if the item is being created by checking if it has an ID set
         if not self.id:
             logger.info(f'Creating new item: {self.name}')
         else:
@@ -65,7 +63,9 @@ class Item(models.Model):
 
 
 
-        
+
+# Commented-out infrastructure and normal models for future development
+              
 # ### Infastructure Models
 # phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Example: ...")
 

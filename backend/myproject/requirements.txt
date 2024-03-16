@@ -1,19 +1,29 @@
+# Core Django framework
 Django==4.2.4
+
+# Django REST framework for building APIs
 djangorestframework==3.14.0
+
+# MySQL database support
 mysqlclient==2.2.4
+
+# Date and time utilities
 python-dateutil==2.8.2
+
+# Load environment variables from .env files
 python-dotenv==1.0.1
+
+# Library for making HTTP requests
 requests==2.26.0
+
+# SQL parser for Python
 sqlparse==0.4.4
 
-
-
-
-
+# Character encoding normalizer
 charset-normalizer==2.0.4
 
-
+# Serialization library
 dill==0.3.7
 
-
-django-cors-headers==4.3.1 # resolves corss origin resource sharing
+# Handling Cross-Origin Resource Sharing (CORS) for Django applications
+django-cors-headers==4.3.1 # Resolves cross-origin resource sharing issues

@@ -1,16 +1,15 @@
-
-/* Reserving index.css for the most universal styles and resets that you want to be applied no matter what components your application uses or how it evolves. */
-
+/* Global body styles to reset margin and set a base font family */
 body {
-  margin: 0;
+  margin: 0; /* Removes default browser margin */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    sans-serif; /* Sets a stack of font-families for better cross-browser compatibility */
+  -webkit-font-smoothing: antialiased; /* Improves text rendering in Webkit browsers */
+  -moz-osx-font-smoothing: grayscale; /* Improves text rendering in Firefox on macOS */
 }
 
+/* Specific styles for elements using the <code> tag */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    monospace; /* Sets a monospace font for code elements */
 }

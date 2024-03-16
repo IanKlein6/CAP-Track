@@ -5,23 +5,32 @@ import { useNavigate } from 'react-router-dom';
 function Dashboard() {
     const navigate = useNavigate();
 
-    const goToProfile = () => {
-        navigate('/profile'); // Update this path to match your profile page route
-    };
+    // Navigate to the profile page
+    const goToProfile = () => navigate('/profile');
 
-    const goToForums = () => {
-        navigate('/forums'); // Update this path to match your forums page route
-    };
+    // Navigate to the forums page
+    const goToForums = () => navigate('/forums');
 
     return (
         <Container maxWidth="sm">
             <Typography variant="h4" component="h1" gutterBottom>
                 Dashboard
             </Typography>
-            <Button variant="contained" color="primary" onClick={goToProfile} fullWidth style={{ marginBottom: '10px' }}>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={goToProfile}
+                fullWidth
+                style={{ marginBottom: '10px' }}
+            >
                 Go to Profile
             </Button>
-            <Button variant="contained" color="secondary" onClick={goToForums} fullWidth>
+            <Button
+                variant="contained"
+                color="secondary"
+                onClick={goToForums}
+                fullWidth
+            >
                 Go to Forums
             </Button>
         </Container>

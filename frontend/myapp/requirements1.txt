@@ -1,24 +1,25 @@
+# Node.js version
 node.js v16.20.2
 
-anxios #promise based HTTP client connection from django to react
+# Axios - Promise-based HTTP client for making requests to Django backend from React
+axios
 
-react-router-dom # router for react app.js
+# React Router - Declarative routing for React applications
+react-router-dom
 
+# Material-UI - UI library for React that provides various components and utilities
+@mui/material@5.15.10
+@mui/core-downloads-tracker@5.15.10
+@mui/system@5.15.9
+@mui/private-theming@5.15.9
+@mui/styled-engine@5.15.9
+@mui/utils@5.15.9
+@mui/base@5.0.0-beta.36
 
-@mui/material@5.15.10, @mui/core-downloads-tracker@5.15.10, @mui/system@5.15.9, @mui/private-theming@5.15.9, @mui/styled-engine@5.15.9, @mui/utils@5.15.9, @mui/base@5.0.0-beta.36
+# Material-UI Icons - Provides icon components for Material-UI applications
 npm install @mui/icons-material
 
-mui/styled-engine@5.15.9, @mui/utils@5.15.9
-├── https://github.com/sponsors/sindresorhus
-│   └── escape-string-regexp@4.0.0, import-fresh@3.3.0, parse-json@5.2.0
-└── https://github.com/sponsors/ljharb
-    └── resolve@1.22.8, is-core-module@2.13.1, function-bind@1.1.2, supports-preserve-symlinks-flag@1.0.0
+# Additional Material-UI dependencies
+@mui/styled-engine@5.15.9
+@mui/utils@5.15.9
 
-
-
-├── https://opencollective.com/mui-org
-│   └── @mui/material@5.15.10, @mui/base@5.0.0-beta.36, @mui/core-downloads-tracker@5.15.10, @mui/system@5.15.9, @mui/private-theming@5.15.9, @mui/styled-engine@5.15.9, @mui/utils@5.15.9
-├── https://github.com/sponsors/sindresorhus
-│   └── escape-string-regexp@4.0.0, import-fresh@3.3.0, parse-json@5.2.0
-└── https://github.com/sponsors/ljharb
-    └── resolve@1.22.8, is-core-module@2.13.1, function-bind@1.1.2, supports-preserve-symlinks-flag@1.0.0

@@ -6,11 +6,10 @@ function Profile() {
     const [userData, setUserData] = useState({
         username: '',
         email: '',
-        // Add other fields as necessary
     });
 
+    // Effect to fetch user data on component mount
     useEffect(() => {
-        // Fetch user data on component mount
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/api/profile/');
@@ -23,6 +22,7 @@ function Profile() {
         fetchData();
     }, []);
 
+    // Handle input changes
     const handleChange = (e) => {
         setUserData({
             ...userData,
@@ -30,10 +30,10 @@ function Profile() {
         });
     };
 
+    // Handle form submission to update user profile
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Update user data
             await axios.patch('http://localhost:8000/api/profile/', userData);
             alert('Profile updated successfully!');
         } catch (error) {
@@ -67,7 +67,7 @@ function Profile() {
                     value={userData.email}
                     onChange={handleChange}
                 />
-                {/* Add other fields as necessary */}
+                {/* Add other input fields as necessary */}
                 <Button type="submit" variant="contained" color="primary" fullWidth>
                     Update Profile
                 </Button>
