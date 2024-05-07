@@ -14,6 +14,18 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import logging
+
+logger = logging.getLogger(__name__)
+
+def get_env_variable(var_name):
+    """Retrieve an environment variable and log its usage."""
+    value = os.getenv(var_name)
+    if value is not None:
+        logger.info(f'Environment variable {var_name} accessed, value used: {value}')
+    else:
+        logger.warning(f'Environment variable {var_name} accessed but not set')
+    return value
 
 # Load environment variables from .env file
 load_dotenv()

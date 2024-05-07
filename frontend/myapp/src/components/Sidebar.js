@@ -17,7 +17,7 @@ function Sidebar() {
   // Define the menu items with their respective icons and paths
   const menuItems = [
     { text: 'Login', icon: <LoginIcon />, path: '/login' },
-    { text: 'Sign Up', icon: <AppRegistrationIcon />, path: '/signup' },
+    { text: 'Sign Up', icon: <AppRegistrationIcon />, path: '/usersignup' },
     { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
     { text: 'Profile', icon: <PersonIcon />, path: '/profile' },
     { text: 'Forum', icon: <ForumIcon />, path: '/forum' },

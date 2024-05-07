@@ -8,6 +8,8 @@ import Forum from './components/Forum';
 import ProtectedRoute from './components/ProtectedRoute';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
+import Login from './components/Login';
+import UserSignUp from './components/UserSignUp';
 
 // Setting axios to send cookies with each request, necessary for sessions or authentication.
 axios.defaults.withCredentials = true;
@@ -25,8 +27,11 @@ function App() {
               {/* Define routes for different components. Uncomment the next line to use protected routes. */}
               {/* <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} /> */}
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="usersignup" element={<UserSignUp/>} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/forum" element={<Forum />} />
+              
             </Routes>
           </div>
         </div>
