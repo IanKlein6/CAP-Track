@@ -22,6 +22,18 @@ class InvitationCode(models.Model):
 
 # Custom User model for authentication
 class CustomUser(AbstractUser):
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='customuser_groups',  # Changed from default 'user_set' to 'customuser_groups'
+        blank=True,
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='customuser_user_permissions',  # Changed from default 'user_set' to 'customuser_user_permissions'
+        blank=True,
+    )
+    
     bio = models.TextField(blank=True)
     email = models.EmailField(unique=True) # Email as the primary identifier
 

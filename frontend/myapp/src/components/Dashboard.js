@@ -9,7 +9,7 @@ function Dashboard() {
     const goToProfile = () => navigate('/profile');
 
     // Navigate to the forums page
-    const goToForums = () => navigate('/forums');
+    const goToForums = () => navigate('/forum');
 
     return (
         <Container maxWidth="sm">
@@ -31,7 +31,7 @@ function Dashboard() {
                 onClick={goToForums}
                 fullWidth
             >
-                Go to Forums
+                Go to Forum
             </Button>
         </Container>
     );

@@ -34,7 +34,8 @@ Change User:
         Have to create a new user   
         DROP USER 'old_username'@'localhost'; # to remove old user
 
-
+Check if Installed:
+    pip show python-dotenv
 
 
 

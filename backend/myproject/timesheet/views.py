@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Sum
-from rest_framework import viewsets, status, generics, APIView
+from rest_framework import viewsets, status, generics
+from rest_framework.views import APIView
 from .models import Item, InvitationCode
 from .serializers import ItemSerializer, UserSerializer
 from django.contrib.auth import authenticate, get_user_model

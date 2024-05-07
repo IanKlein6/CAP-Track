@@ -20,7 +20,7 @@ function Sidebar() {
     { text: 'Sign Up', icon: <AppRegistrationIcon />, path: '/signup' },
     { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
     { text: 'Profile', icon: <PersonIcon />, path: '/profile' },
-    { text: 'Forums', icon: <ForumIcon />, path: '/forums' },
+    { text: 'Forum', icon: <ForumIcon />, path: '/forum' },
   ];
 
   return (
