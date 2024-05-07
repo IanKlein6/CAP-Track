@@ -6,6 +6,7 @@ axios
 
 # React Router - Declarative routing for React applications
 react-router-dom
+npm install react-router-dom@6
 
 # Material-UI - UI library for React that provides various components and utilities
 @mui/material@5.15.10

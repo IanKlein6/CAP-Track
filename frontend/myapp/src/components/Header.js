@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,17 +7,7 @@ import { useUser } from '../context/UserContext';
 function Header() {
     const { user, setUser } = useUser(); // Access user context
     const navigate = useNavigate();
-    const [anchorEl, setAnchorEl] = useState(null); // State for controlling the menu anchor
-
-    // Handles opening the menu
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    // Handles closing the menu
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    
 
     // Handles the logout process
     const handleLogout = async () => {

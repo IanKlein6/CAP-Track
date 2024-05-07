@@ -9,8 +9,17 @@
     - Switched logger to INFO. debug was to much. Logging officially works now
     - created new security key with env. 
     - forum work front and backend
+    - Got the Admin to work again. Had problems with no css for the admin. did collectstatic and added AUTH_USER_MODEL = 'timesheet.CustomUser' to the settings. now it seems to work. 
+    - Login still doesn't work for some reason
+    - Fixed login. Moved it to the Index folder, then integrated it in to the index.js allowing the log in process to take place before it gets sent to the main app. 
+        - used isAuthenticated() to check if the login worked and then to send to the next page
+    - Sign up link in login created. routed through the index keeping everything in once place making it easeir to manage. added auto fill to keep the browser happy
+
+
     
     
-    
-    ** to do:
+ ** TO DOs:
+    fix the sign up so that i am able to create new sign ups for logging in. 
+    debate about remove invitation code for now add it back later to keep it from being to complex. 
+    redesign the forum page to be the time log page that works. reasearch other programs and how they do it. 
    

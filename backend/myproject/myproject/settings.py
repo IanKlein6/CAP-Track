@@ -37,7 +37,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False # Set to False in production
+DEBUG = True # Set to False in production
 
 # List of allowed hosts/domains for this Django site.
 # This is a security measure to prevent HTTP Host header attacks.
@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'timesheet',
     'rest_framework.authtoken',
 ]
+
+AUTH_USER_MODEL = 'timesheet.CustomUser'
 
 # Middleware
 MIDDLEWARE = [

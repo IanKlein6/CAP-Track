@@ -4,6 +4,6 @@ node_modules/
 Security.txt
 
 .env
-
+.django_debug.log
 Infos.txt
 Notes.txt
