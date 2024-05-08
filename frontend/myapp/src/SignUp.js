@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 function UserSignUp() {
     const [formData, setFormData] = useState({
-        username: '',
         email: '',
         password: '',
         invitationCode: '',
@@ -51,16 +50,7 @@ function UserSignUp() {
         <Container maxWidth="sm">
             <Typography variant="h4" component="h1" gutterBottom>Sign Up</Typography>
             <form onSubmit={handleSubmit}>
-                {/* Fields for username, email, password, and invitation code */}
-                <TextField 
-                    label="Username" 
-                    variant="outlined" 
-                    fullWidth margin="normal" 
-                    name="username" 
-                    autoComplete="username"
-                    value={formData.username} 
-                    onChange={handleChange} 
-                />
+                {/* Fields for email, password, and invitation code */}
                 <TextField 
                     label="Email" 
                     variant="outlined" 

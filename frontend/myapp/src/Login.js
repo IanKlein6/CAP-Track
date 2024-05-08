@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from './context/UserContext';
 
 function Login() {
-    const [loginData, setLoginData] = useState({ username: '', password: '' });
+    const [loginData, setLoginData] = useState({ email: '', password: '' });
     const [loading, setLoading] = useState(false);
     const [snackbar, setSnackbar] = useState({ open: false, message: '' });
 
@@ -22,7 +22,7 @@ function Login() {
         try {
             const response = await axios.post('http://localhost:8000/api/login/', loginData, { withCredentials: true });
             if (response.status === 200) {
-                setUser({ username: loginData.username });
+                setUser({ email: loginData.email });
                 navigate('/dashboard');
                 setSnackbar({ open: true, message: 'Login successful!' });
             }
@@ -45,13 +45,13 @@ function Login() {
             <Typography variant="h4" component="h1" gutterBottom>Log In</Typography>
             <form onSubmit={handleSubmit}>
                 <TextField
-                    label="Username"
+                    label="Email"
                     variant="outlined"
                     fullWidth
                     margin="normal"
-                    name="username"
-                    autoComplete="username" //auto complete handleing for Browers
-                    value={loginData.username}
+                    name="email"
+                    autoComplete="email" //auto complete handleing for Browers
+                    value={loginData.email}
                     onChange={handleChange}
                 />
                 <TextField

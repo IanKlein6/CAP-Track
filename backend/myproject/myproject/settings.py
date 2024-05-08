@@ -88,6 +88,11 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = [
+    'timesheet.backends.EmailBackend',  # Use your custom backend
+    
+]
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -141,6 +146,9 @@ TEMPLATES = [
         },
     },
 ]
+
+
+
 
 # Logging configuration
 LOGGING = {

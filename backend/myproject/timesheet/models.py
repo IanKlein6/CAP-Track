@@ -6,11 +6,13 @@ from datetime import datetime
 import logging
 
 # User Authentication
+from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 
 # Logger setup
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 # Invitation Code model for managing invitation codes
 class InvitationCode(models.Model):
@@ -20,36 +22,76 @@ class InvitationCode(models.Model):
     def __str__(self):
         return self.code
 
+class CustomUserManager(BaseUserManager):
+    print("models custom manager 1")
+    def create_user(self, email, password=None, **extra_fields):
+        print("models custom manager 2")
+        """
+        Create and save a User with the given email and password.
+        """
+        if not email:
+            print("models custom manager 3")
+            raise ValueError('The Email must be set')
+        print("models custom manager 4")
+        email = self.normalize_email(email)
+        print(f"models custom manager 5 email form self nomalized email {email}")
+        user = self.model(email=email, **extra_fields)
+        print(f"models custom manager 6 user from model email email {user}")
+        print(f"models custom manager 7 before set_ {password}, {user}")
+        user.set_password(password)
+        print(f"models custom manager 8 AFTER set_ {password}, {user}")
+        user.save(using=self._db)
+        print("models custom manager 9 saved")
+        return user
+
+    def create_superuser(self, email, password, **extra_fields):
+        """
+        Create and save a SuperUser with the given email and password.
+        """
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        
+        return self.create_user(email, password, **extra_fields)
+
+
 # Custom User model for authentication
 class CustomUser(AbstractUser):
-
+    print("Custom user model 1")
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='customuser_groups',  # Changed from default 'user_set' to 'customuser_groups'
         blank=True,
     )
+    print("Custom user model 2")
     user_permissions = models.ManyToManyField(
         'auth.Permission',
         related_name='customuser_user_permissions',  # Changed from default 'user_set' to 'customuser_user_permissions'
         blank=True,
     )
-    
+    print("Custom user model 3")
     bio = models.TextField(blank=True)
     email = models.EmailField(unique=True) # Email as the primary identifier
-
+    object = CustomUserManager()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username'] # Additional required fields
+    REQUIRED_FIELDS = [] # Additional required fields
+    print("Custom user model 4")
 
     def __str__(self):
+        print("Custom user model 5")
         return self.email
     
     def save(self, *args, **kwargs):
+        print("Custom user model 6")
         if self._state.adding:
+            print("Custom user model 7")
             logger.info(f'Creating new user: {self.email}')
         else:
+            print("Custom user model 8")
             logger.info(f'Updating user: {self.email}')
         super().save(*args, **kwargs)
 
+        logger.info(f"Hashed password: {self.password}")
+        print("Custom user model 9")
     def delete(self, *args, **kwargs):
         logger.info(f'Deleting user: {self.email}')
         super().delete(*args, **kwargs)
