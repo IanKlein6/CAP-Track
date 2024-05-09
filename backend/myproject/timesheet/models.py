@@ -24,11 +24,9 @@ class InvitationCode(models.Model):
 
 class CustomUserManager(BaseUserManager):
     print("models custom manager 1")
-    def create_user(self, email, password=None, **extra_fields):
+    use_in_migrations = True
+    def _create_user(self, email, password, **extra_fields):
         print("models custom manager 2")
-        """
-        Create and save a User with the given email and password.
-        """
         if not email:
             print("models custom manager 3")
             raise ValueError('The Email must be set')
@@ -44,40 +42,34 @@ class CustomUserManager(BaseUserManager):
         print("models custom manager 9 saved")
         return user
 
+    def create_user(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
+
     def create_superuser(self, email, password, **extra_fields):
-        """
-        Create and save a SuperUser with the given email and password.
-        """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         
-        return self.create_user(email, password, **extra_fields)
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+
+        return self._create_user(email, password, **extra_fields)
 
 
 # Custom User model for authentication
 class CustomUser(AbstractUser):
-    print("Custom user model 1")
-    groups = models.ManyToManyField(
-        'auth.Group',
-        related_name='customuser_groups',  # Changed from default 'user_set' to 'customuser_groups'
-        blank=True,
-    )
-    print("Custom user model 2")
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        related_name='customuser_user_permissions',  # Changed from default 'user_set' to 'customuser_user_permissions'
-        blank=True,
-    )
-    print("Custom user model 3")
-    bio = models.TextField(blank=True)
-    email = models.EmailField(unique=True) # Email as the primary identifier
-    object = CustomUserManager()
+    username = None
+    email = models.EmailField(('email address'), unique=True)
+
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = [] # Additional required fields
-    print("Custom user model 4")
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
 
     def __str__(self):
-        print("Custom user model 5")
         return self.email
     
     def save(self, *args, **kwargs):

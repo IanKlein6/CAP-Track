@@ -2,6 +2,18 @@ from django.contrib import admin
 from django import forms
 from.models import CustomUser  # Make sure to import your CustomUser model
 
+
+from .models import InvitationCode
+
+class InvitationCodeAdmin(admin.ModelAdmin):
+    list_display = ['code', 'is_used']  # Columns to display in the admin list view
+    search_fields = ['code']  # Enable search by 'code'
+    list_filter = ['is_used']  # Enable filtering by 'is_used'
+
+    # Optionally, customize forms, define methods, etc.
+
+
+
 class CustomUserChangeForm(forms.ModelForm):
     class Meta:
         model = CustomUser
@@ -40,4 +52,7 @@ class CustomUserAdmin(admin.ModelAdmin):
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')
         }),
     )
+
+    
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(InvitationCode, InvitationCodeAdmin)
