@@ -73,8 +73,10 @@ MIDDLEWARE = [
 ]
 
 # CORS settings
-CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
+cors_origins_raw = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:3000')
+CORS_ALLOWED_ORIGINS = cors_origins_raw.strip().split(',')
 CORS_ALLOW_CREDENTIALS = True
+
 
 # Database
 DATABASES = {

@@ -23,13 +23,14 @@ class LoginView(APIView):
         user = authenticate(request, username=email, password=password)
         if user:
             token, _ = Token.objects.get_or_create(user=user)
-            response = Response(status=status.HTTP_200_OK)
+            response_data = {'token': token.key}
+            response = Response(response_data, status=status.HTTP_200_OK)
             response.set_cookie('auth_token', token.key, httponly=True, samesite='Lax')
             logging.info(f"{email} has been authenticated")
             return response
         else:
             logging.info(f"Password match failed for {email}" "authentication failed")
-            return Response({"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Authentication failed. Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
         
 # View for user logout
 class LogoutView(APIView):

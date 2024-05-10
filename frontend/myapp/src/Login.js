@@ -8,37 +8,46 @@ function Login() {
     const [loginData, setLoginData] = useState({ email: '', password: '' });
     const [loading, setLoading] = useState(false);
     const [snackbar, setSnackbar] = useState({ open: false, message: '' });
-
     const navigate = useNavigate();
     const { setUser } = useUser();
 
     const handleChange = (e) => {
-        setLoginData({ ...loginData, [e.target.name]: e.target.value });
+        setLoginData({...loginData, [e.target.name]: e.target.value });
+        console.log('Input changed:', e.target.name, e.target.value); // Debugging log
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:8000/api/login/', loginData, { withCredentials: true });
-            if (response.status === 200) {
-                setUser({ email: loginData.email });
+            const response = await axios.post('http://127.0.0.1:8000/api/login/', loginData, { withCredentials: true });
+            console.log('Login response:', response); // Debugging log
+            if (response.status === 200 && response.data.token) {
+                localStorage.setItem('token', response.data.token); // Store token securely
+                setUser({ email: loginData.email, token: response.data.token });
                 navigate('/dashboard');
                 setSnackbar({ open: true, message: 'Login successful!' });
+            } else {
+                throw new Error('Authentication failed');
             }
         } catch (error) {
-            const errorMessage = error.response?.data?.error || 'Login failed. Please try again.';
-            setSnackbar({ open: true, message: errorMessage });
+            console.error('Login error:', error); // Debugging log
+            setSnackbar({ 
+                open: true, 
+                message: error.response?.data?.error || 'Login failed. Please try again.' 
+            });
         } finally {
             setLoading(false);
         }
     };
 
-    const handleSignUp = () => {
-        navigate('/SignUp');
+    const handleSignUpClick = () => {
+        navigate('/signup'); // Navigation to SignUp page
     };
 
-    const handleCloseSnackbar = () => setSnackbar({ open: false, message: '' });
+    const handleCloseSnackbar = () => {
+        setSnackbar({ open: false, message: '' });
+    };
 
     return (
         <Container maxWidth="sm">
@@ -50,7 +59,7 @@ function Login() {
                     fullWidth
                     margin="normal"
                     name="email"
-                    autoComplete="email" //auto complete handleing for Browers
+                    autoComplete="email"
                     value={loginData.email}
                     onChange={handleChange}
                 />
@@ -66,13 +75,12 @@ function Login() {
                     onChange={handleChange}
                 />
                 <Button type="submit" variant="contained" color="primary" fullWidth disabled={loading}>
-                    {loading ? <CircularProgress size={24} /> : 'Log In'}
+                    {loading? <CircularProgress size={24} /> : 'Log In'}
                 </Button>
-                <Button onClick={handleSignUp} color="secondary" fullWidth style={{ marginTop: '10px' }}>
+                <Button onClick={handleSignUpClick} color="secondary" fullWidth style={{ marginTop: '10px' }}>
                     Sign Up
                 </Button>
             </form>
-           
             <Snackbar
                 open={snackbar.open}
                 autoHideDuration={6000}

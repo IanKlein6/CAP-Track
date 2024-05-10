@@ -1,60 +1,43 @@
 import React, { useState } from 'react';
-import { TextField, Button, Container, Typography, List, ListItem, ListItemText, Snackbar } from '@mui/material';
+import { TextField, Button, Container, Typography, Snackbar } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function UserSignUp() {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-        invitationCode: '',
-    });
-    const [users, setUsers] = useState([]);
-    const [showUsers, setShowUsers] = useState(false);
+    const [formData, setFormData] = useState({ email: '', password: '', invitationCode: '' });
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const navigate = useNavigate();
 
-    // Handle form field changes
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/signup/', formData);
+            const response = await axios.post('http://127.0.0.1:8000/api/signup/', formData);
             if (response.status === 201) {
                 setOpenSnackbar(true);
-                navigate('/dashboard'); // Navigate to the dashboard on successful sign up
+                navigate('/login'); // Navigate to login on successful sign up
             }
         } catch (error) {
-            console.error('There was an error:', error.response || error);
+            setOpenSnackbar(true);
         }
     };
 
-    // Fetch users from the backend
-    const fetchUsers = async () => {
-        try {
-            const response = await axios.get('http://localhost:8000/api/users/');
-            setUsers(response.data);
-            setShowUsers(true);
-        } catch (error) {
-            console.error('There was an error fetching the users:', error.response);
-        }
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
     };
-
-    const handleCloseSnackbar = () => setOpenSnackbar(false);
 
     return (
         <Container maxWidth="sm">
             <Typography variant="h4" component="h1" gutterBottom>Sign Up</Typography>
             <form onSubmit={handleSubmit}>
-                {/* Fields for email, password, and invitation code */}
                 <TextField 
                     label="Email" 
                     variant="outlined" 
-                    fullWidth margin="normal" 
+                    fullWidth 
+                    margin="normal" 
                     name="email" 
                     type="email" 
                     value={formData.email} 
@@ -63,17 +46,19 @@ function UserSignUp() {
                 <TextField 
                     label="Password" 
                     variant="outlined" 
-                    fullWidth margin="normal" 
-                    autoComplete="current-password"
+                    fullWidth 
+                    margin="normal" 
                     name="password" 
                     type="password" 
+                    autoComplete="new-password"
                     value={formData.password} 
                     onChange={handleChange} 
                 />
                 <TextField 
                     label="Invitation Code" 
                     variant="outlined" 
-                    fullWidth margin="normal" 
+                    fullWidth 
+                    margin="normal" 
                     name="invitationCode" 
                     value={formData.invitationCode} 
                     onChange={handleChange} 
@@ -82,21 +67,7 @@ function UserSignUp() {
                     Sign Up
                 </Button>
             </form>
-            {/* Button to fetch and display users */}
-            {showUsers && (
-                <>
-                    <Button onClick={fetchUsers} variant="contained" color="secondary" fullWidth style={{ marginTop: '20px' }}>Retrieve Users</Button>
-                    <Typography variant="h5" component="h2" style={{ marginTop: '20px' }}>User List</Typography>
-                    <List>
-                        {users.map(user => (
-                            <ListItem key={user.id}>
-                                <ListItemText primary={user.username} secondary={user.email} />
-                            </ListItem>
-                        ))}
-                    </List>
-                </>
-            )}
-            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="User created successfully!" />
+            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="User created successfully or failed to create user!" />
         </Container>
     );
 }
