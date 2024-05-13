@@ -1,0 +1,17 @@
+/* Sidebar.css */
+.sidebar {
+    width: 250px; /* Fixed width */
+    background-color: #f4f4f4; /* Light gray background */
+    height: 100vh; /* Full height */
+    overflow-y: auto; /* Scrollable */
+  }
+  
+  .list-item {
+    padding: 8px 16px; /* Padding for list items */
+  }
+  
+  .list-item.selected {
+    background-color: #e0e0e0; /* Lighter gray for selected item */
+    border-left: 5px solid blue; /* Blue left border for selected item */
+  }
+  

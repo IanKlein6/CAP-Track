@@ -46,10 +46,14 @@
 /* Container for the app's content, using flexbox for layout */
 .app-container {
   display: flex;
+  flex-direction: row;
+  min-height: 100vh;
 }
 
 /* General content styling, with adjustable padding */
 .content {
   flex: 1;
   padding: 20px; /* Adjust padding based on your design needs */
+  overflow-y: auto;
 }
+

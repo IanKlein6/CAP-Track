@@ -7,8 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ForumIcon from '@mui/icons-material/Forum';
 import PersonIcon from '@mui/icons-material/Person';
-import LoginIcon from '@mui/icons-material/Login';
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import './app.css';
 
 function Sidebar() {
   const navigate = useNavigate();
@@ -16,8 +15,6 @@ function Sidebar() {
 
   // Define the menu items with their respective icons and paths
   const menuItems = [
-    { text: 'Login', icon: <LoginIcon />, path: '/login' },
-    { text: 'Sign Up', icon: <AppRegistrationIcon />, path: '/usersignup' },
     { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
     { text: 'Profile', icon: <PersonIcon />, path: '/profile' },
     { text: 'Forum', icon: <ForumIcon />, path: '/forum' },
@@ -30,7 +27,7 @@ function Sidebar() {
           button
           key={item.text}
           onClick={() => navigate(item.path)}
-          selected={location.pathname === item.path} // Highlight the current path
+          selected={location.pathname === item.path ? 'selectedItem' : ''} // Highlight the current path
         >
           <ListItemIcon>{item.icon}</ListItemIcon>
           <ListItemText primary={item.text} />

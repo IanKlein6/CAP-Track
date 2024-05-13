@@ -15,6 +15,10 @@
         - used isAuthenticated() to check if the login worked and then to send to the next page
     - Sign up link in login created. routed through the index keeping everything in once place making it easeir to manage. added auto fill to keep the browser happy
 
+10.05 
+    - made custom backend.py to handle the custom user i created changing the user to only need an email and password. the username section is being overridden to allow the email to be 
+    - changed frontend architeture after relizing you cant have two levels of routing in two different files. i removed the routing in index and now am routing eveything in app.js. Chnaged routing with {!user && ()} to secure the rest of the app making it only accessable after going through the login process. 
+    - fixed login and signup. needed token to be sent from backend to front end. Added response_data = {'token': token.key} to the login view which allowed the front end to recive the token saying the user was logged in. 
 
     
     
