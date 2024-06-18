@@ -22,8 +22,7 @@ function Login() {
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/login/', loginData, { withCredentials: true });
             console.log('Login response:', response); // Debugging log
-            if (response.status === 200 && response.data.token) {
-                localStorage.setItem('token', response.data.token); // Store token securely
+            if (response.status === 200) {
                 setUser({ email: loginData.email, token: response.data.token });
                 navigate('/dashboard');
                 setSnackbar({ open: true, message: 'Login successful!' });

@@ -2,9 +2,9 @@ import './';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useUser } from './context/UserContext';
-import Dashboard from './components/Dashboard/Dashboard';
-import Profile from './components/Profile/Profile';
-import Forum from './components/Forum/Forum';
+import Dashboard from './components/Dashboard';
+import Profile from './components/Profile';
+import Forum from './components/Forum';
 import Login from './Login';
 import SignUp from './SignUp';
 import Sidebar from './components/Sidebar';
@@ -15,7 +15,7 @@ function App() {
 
   return (
     <Router>
-      <div className="app-container">
+      <div className="app-container"> 
         <Header />
         {user && <Sidebar />}
         <div className="content">

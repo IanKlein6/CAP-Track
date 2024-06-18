@@ -20,6 +20,9 @@
     - changed frontend architeture after relizing you cant have two levels of routing in two different files. i removed the routing in index and now am routing eveything in app.js. Chnaged routing with {!user && ()} to secure the rest of the app making it only accessable after going through the login process. 
     - fixed login and signup. needed token to be sent from backend to front end. Added response_data = {'token': token.key} to the login view which allowed the front end to recive the token saying the user was logged in. 
 
+17.06
+    - fixed forums to retriev by name rather than by ID. easier for the user to input a name then figure out what for id the database gave the item
+    
     
     
  ** TO DOs:

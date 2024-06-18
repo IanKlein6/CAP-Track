@@ -9,15 +9,17 @@ import {
   List,
   ListItem,
   ListItemText,
-  Paper
+  Paper,
+  Alert
 } from '@mui/material';
 
 function Forum() {
   const [items, setItems] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [fetchId, setFetchId] = useState('');
-  const [fetchedItem, setFetchedItem] = useState(null);
+  const [searchName, setSearchName] = useState('');
+  const [fetchedItem, setFetchedItem] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(''); // State for the error message
 
   // Fetch items from the backend
   useEffect(() => {
@@ -46,86 +48,100 @@ function Forum() {
       .catch(error => console.error('There was an error deleting the item: ', error));
   };
 
-  // Fetch an item by ID
-  const handleFetchById = (event) => {
+  // Fetch an item by name
+  const handleSearchByName = (event) => {
     event.preventDefault();
-    axios.get(`http://localhost:8000/api/test/items/${fetchId}/`)
-      .then(response => setFetchedItem(response.data))
+    setErrorMessage(''); // Clear any previous error message
+    axios.get(`http://localhost:8000/api/items/name/?name=${searchName}`)
+      .then(response => {
+        setFetchedItem(response.data);
+        if (response.data.length === 0) {
+          setErrorMessage('Name not available. Please enter a valid name.');
+        }
+      })
       .catch(error => {
-        console.error('There was an error fetching the item: ', error);
-        setFetchedItem(null);
+        console.error('There was an error fetching the items by name: ', error);
+        setFetchedItem([]);
+        setErrorMessage('Name not available. Please enter a valid name.');
       });
   };
 
   return (
-    <>
-      <Container maxWidth="sm">
-        <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Items
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Description"
-              multiline
-              rows={4}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 3, mb: 2 }}>
-              Submit
-            </Button>
-          </Box>
-          <List>
-            {items.map(item => (
-              <ListItem
-                key={item.id}
-                secondaryAction={
-                  <Button variant="outlined" color="error" onClick={() => handleDelete(item.id)}>
-                    Delete
-                  </Button>
-                }>
-                <ListItemText primary={item.name} secondary={item.description} />
-              </ListItem>
-            ))}
-          </List>
-          <Box component="form" onSubmit={handleFetchById} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Fetch Item by ID"
-              value={fetchId}
-              onChange={(e) => setFetchId(e.target.value)}
-            />
-            <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 3, mb: 2 }}>
-              Fetch
-            </Button>
-          </Box>
-          {fetchedItem && (
-            <Paper elevation={3} sx={{ p: 2, mt: 3 }}>
-              <Typography variant="h6" gutterBottom>
-                Fetched Item Details
-              </Typography>
-              <Typography>ID: {fetchedItem.id}</Typography>
-              <Typography>Name: {fetchedItem.name}</Typography>
-              <Typography>Description: {fetchedItem.description}</Typography>
-            </Paper>
-          )}
+    <Container maxWidth="sm">
+      <Box sx={{ my: 4 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Items
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Description"
+            multiline
+            rows={4}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 3, mb: 2 }}>
+            Submit
+          </Button>
         </Box>
-      </Container>
-    </>
+        <List>
+          {items.map(item => (
+            <ListItem
+              key={item.id}
+              secondaryAction={
+                <Button variant="outlined" color="error" onClick={() => handleDelete(item.id)}>
+                  Delete
+                </Button>
+              }>
+              <ListItemText primary={item.name} secondary={item.description} />
+            </ListItem>
+          ))}
+        </List>
+        <Box component="form" onSubmit={handleSearchByName} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Fetch Item by Name"
+            value={searchName}
+            onChange={(e) => setSearchName(e.target.value)}
+          />
+          <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mt: 3, mb: 2 }}>
+            Fetch
+          </Button>
+        </Box>
+        {errorMessage && (
+          <Alert severity="error" sx={{ mt: 2 }}>
+            {errorMessage}
+          </Alert>
+        )}
+        {fetchedItem.length > 0 && (
+          <Paper elevation={3} sx={{ p: 2, mt: 3 }}>
+            <Typography variant="h6" gutterBottom>
+              Fetched Item Details
+            </Typography>
+            <List>
+              {fetchedItem.map(item => (
+                <ListItem key={item.id}>
+                  <ListItemText primary={item.name} secondary={item.description} />
+                </ListItem>
+              ))}
+            </List>
+          </Paper>
+        )}
+      </Box>
+    </Container>
   );
 }
 

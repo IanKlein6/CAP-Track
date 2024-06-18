@@ -4,6 +4,9 @@
     background-color: #f4f4f4; /* Light gray background */
     height: 100vh; /* Full height */
     overflow-y: auto; /* Scrollable */
+    position: fixed; /* Stick it to the side */
+    top: 0;
+    left: 0;
   }
   
   .list-item {

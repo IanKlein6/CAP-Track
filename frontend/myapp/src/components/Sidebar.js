@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ForumIcon from '@mui/icons-material/Forum';
 import PersonIcon from '@mui/icons-material/Person';
-import './app.css';
+import './Sidebar.css';
 
 function Sidebar() {
   const navigate = useNavigate();

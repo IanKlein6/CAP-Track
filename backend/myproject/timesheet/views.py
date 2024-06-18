@@ -7,7 +7,9 @@ from .serializers import ItemSerializer, UserSerializer
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
+from rest_framework.decorators import api_view
 import logging
+
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -23,15 +25,14 @@ class LoginView(APIView):
         user = authenticate(request, username=email, password=password)
         if user:
             token, _ = Token.objects.get_or_create(user=user)
-            response_data = {'token': token.key}
-            response = Response(response_data, status=status.HTTP_200_OK)
+            response = Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
             response.set_cookie('auth_token', token.key, httponly=True, samesite='Lax')
             logging.info(f"{email} has been authenticated")
             return response
-        else:
-            logging.info(f"Password match failed for {email}" "authentication failed")
-            return Response({"error": "Authentication failed. Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
-        
+        logging.info(f"Password match failed for {email}" "authentication failed")
+        return Response({"error": "Authentication failed. Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
+
+
 # View for user logout
 class LogoutView(APIView):
     def post(self, request):
@@ -74,8 +75,23 @@ class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
 
-def get_item(request, item_id):
-    logger.info(f'Fetching item with ID {item_id}')
+@api_view(['GET'])
+def get_item_by_name(request):
+    logger.debug("Entering get_item_by_name view")
+    item_name = request.query_params.get('name', None)
+    logger.debug(f"Received item_name: {item_name}")
+    if item_name:
+        items = Item.objects.filter(name__icontains=item_name)
+        if items.exists():
+            logger.debug(f"Items found: {items}")
+            serializer = ItemSerializer(items, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            logger.warning(f"No items found for name: {item_name}")
+            return Response({"message": "No items found"}, status=status.HTTP_404_NOT_FOUND)
+    logger.error("Name parameter is required")
+    return Response({"error": "Name parameter is required"}, status=status.HTTP_400_BAD_REQUEST)
+
     # Fetch and return the item...
 
 def delete_item(request, item_id):
